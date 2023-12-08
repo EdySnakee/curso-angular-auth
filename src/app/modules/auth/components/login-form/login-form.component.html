@@ -28,6 +28,7 @@
       </p>
     </div>
   </div>
+
   <div>
     <div class="relative">
       <input
@@ -62,5 +63,12 @@
       [loading]="status === 'loading'"
       >Login</app-btn
     >
+    <div *ngIf="status == 'failed'" class="">
+      <p
+      class="font-medium text-red-500 text-center text-lg mt-1 ml-1"
+    >
+      Credenciales invalidas, revisa tus datos
+    </p>
+    </div>
   </div>
 </form>
