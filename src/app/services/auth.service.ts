@@ -34,10 +34,23 @@ export class AuthService {
   }
 
 
-
   //DISPONIBLE
   isAvailable(email:string){
     return this.http.post<{isAvailable:boolean}>(`${this.apiUrl}/auth/is-available`,{email})
   }
+
+
+  //RECUPERAR CONTRASEÑA
+  recovery(email:string){
+    return this.http.post(`${this.apiUrl}/auth/recovery`,{email})
+  }
+
+
+  //CAMBIAR EL PASSWORD
+  changePassword(token:string,newPassword:string){
+    return this.http.post(`${this.apiUrl}/auth/change-password`,{token,newPassword})
+  }
+
+
 
 }
