@@ -19,4 +19,9 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/auth/login`,{email,password})
   }
 
+  // REGISTRO
+  register(name:string, email:string, password:string){
+    return this.http.post(`${this.apiUrl}/auth/register`,{name,email,password})
+  }
+
 }
