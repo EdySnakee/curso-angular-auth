@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
-import { switchMap } from 'rxjs/operators';
+import { switchMap,tap } from 'rxjs/operators';
+import { TokenService } from './token.service';
+import { ResponseToken } from '@models/auth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +14,18 @@ export class AuthService {
 
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private tokenService: TokenService
   ) { }
 
     //LOGIN
   login(email:string, password:string){
-    return this.http.post(`${this.apiUrl}/auth/login`,{email,password})
+    return this.http.post<ResponseToken>(`${this.apiUrl}/auth/login`,{email,password})
+    .pipe(
+      tap(resp =>{
+        this.tokenService.saveToken(resp.access_token)
+      })
+    )
   }
 
   // REGISTRO
