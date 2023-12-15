@@ -7,7 +7,7 @@ import { TokenService } from '@services/token.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class RedirectGuard implements CanActivate {
 
   constructor(
     private tokenService: TokenService,
@@ -15,23 +15,21 @@ export class AuthGuard implements CanActivate {
   ) {
   }
 
-  //Ejemplo usando el access token
+
+  //USANDO EL ACCESS TOKEN
   // canActivate():boolean{
   //   const isValidToken = this.tokenService.isValidToken();
-  //   if(!isValidToken){
-  //     this.router.navigate(['/login']);
-  //     return false;
+  //   if(isValidToken){
+  //     this.router.navigate(['/app']);
   //   }
   //   return true;
   // }
 
-
-  //Ejemplo usando el refresh token ->
+  //USANDO EL REFRESH TOKEN
   canActivate():boolean{
     const isValidToken = this.tokenService.isValidRefreshToken();
-    if(!isValidToken){
-      this.router.navigate(['/login']);
-      return false;
+    if(isValidToken){
+      this.router.navigate(['/app']);
     }
     return true;
   }
